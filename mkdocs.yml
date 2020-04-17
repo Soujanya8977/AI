@@ -1,0 +1,9 @@
+site_name: DXC Industrialized AI Starter
+nav:
+    - Welcome: index.md
+    - Read and Clean: Read.md
+    - Visualization: Visualization.md
+    - Data Pipeline: data_pipeline.md
+    - Experiment: experiment.md
+    - Publish Microservice: publish_microservice.md
+theme: ivory
