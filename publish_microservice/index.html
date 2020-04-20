@@ -39,13 +39,11 @@
             <nav class="nav">
                 <ul class="root">
                     <li class="toctree-l1"><a class="nav-item" href="..">DXC Industrialized AI Starter</a></li>
-                    <li class="toctree-l1"><a class="nav-item" href="../Read/">Read and Clean</a></li>
-                    <li class="toctree-l1"><a class="nav-item" href="../Visualization/">Visualization</a></li>
-                    <li class="toctree-l1"><a class="nav-item" href="../data_pipeline/">Data Pipeline</a></li>
-                    <li class="toctree-l1"><a class="nav-item" href="../experiment/">Run an experiment</a></li>
-                    <li class="toctree-l1 current"><a class="nav-item current" href="./">Publish a Microservice</a>
+                    <li class="toctree-l1"><a class="nav-item" href="../access_clean_explore/">Access, Clean and Explore</a></li>
+                    <li class="toctree-l1"><a class="nav-item" href="../data_pipeline/">Build Data Pipelines</a></li>
+                    <li class="toctree-l1"><a class="nav-item" href="../experiment/">Run AI Experiments</a></li>
+                    <li class="toctree-l1 current"><a class="nav-item current" href="./">Publish Microservice</a>
 <ul class="subnav">
-<li class="toctree-l2"><a class="nav-item toc" href="#publish_microservicemicroservice_design-trained_model">publish_microservice(microservice_design, trained_model):</a></li>
 </ul></li>
                 </ul>
             </nav>
@@ -65,18 +63,14 @@
     
 </ul>
 </nav>
-                <div id="content"><h1 id="publish-a-microservice">Publish a Microservice</h1>
-<p>Insights are delivered through microservices with published APIs. The code in this section prepares an execution environment for the microservice, builds a microservice using the machine-learning model, deploys the microservice into the execution environment, and publishes an API enpoint for the microservice. Design the microservice and deploy it. The work of creating the microservice and deploying it will be done automatically. The code will also automatically handle the source code reposity management.</p>
-<p>This video provides an overview of the algorithm execution environment provided by Algorithmia. It describes the basic concept of the Algorithmia AI Layer and walks you through publishing a microservice. Watch this video if you are unfamiliar with publishing microservices using Algorithmia. This video should be removed or replaced if the microservices are run using something other than Algorithmia.</p>
-<p><a href="https://www.youtube.com/watch?v=56yt2Bouq0o"><img alt="overview of algorithm" src="https://img.youtube.com/vi/56yt2Bouq0o/0.jpg" /></a></p>
-<h3 id="publish_microservicemicroservice_design-trained_model">publish_microservice(microservice_design, trained_model):</h3>
-<p><strong>Configure the microservice execution environment</strong></p>
-<p>The execution environment is where the micorservice runs. This code assumes that the microservice execution environment is Algorithmia.  In order to provide the information required to design the microservice, you must:
-- create an Algorithmia account
-- create an <a href = "https://algorithmia.com/signin#credentials"> API key</a> with BOTH "Read &amp; Write Data" and "Manage Algorithms" permissions enabled
-- create an algorithm user name</p>
-<p><strong>Design the microservice</strong>
-This code defines the parameters needed to build and delpoy a microservice based on the trained model. Update microservice_design with parameters appropriate for your project. The parameters must contain valid keys, namespaces, and model paths from Algorithmia.</p>
+                <div id="content"><h1 id="publish-microservice">Publish Microservice</h1>
+<hr />
+<p>This code assumes that the microservice execution environment is <a href = "https://algorithmia.com/signin#credentials" target="_blank">Algorithmia</a>. The execution environment is where the micorservice runs. In order to provide the information required to design the microservice, you must:</p>
+<ul>
+<li>create an <a href = "https://algorithmia.com/signin#credentials" target="_blank"> Algorithmia</a> account </li>
+<li>create an API key with BOTH "Read &amp; Write Data" and "Manage Algorithms" permissions enabled</li>
+<li>create an algorithm user name</li>
+</ul>
 <pre><code>trained_model is the output of run_experiment() function
 microservice_design = {
     &quot;microservice_name&quot;: &quot;&lt;Name of your microservice&gt;&quot;,
@@ -87,7 +81,28 @@ microservice_design = {
     &quot;model_path&quot;:&quot;&lt;your model_path&gt;&quot;
 }
 
-</code></pre></div>
+# publish the micro service and display the url of the api
+api_url = ai.publish_microservice(microservice_design, trained_model)
+print(&quot;api url: &quot; + api_url)
+</code></pre>
+
+<ul>
+<li>
+<p><strong>publish_microservice(microservice_design, trained_model):</strong></p>
+<ul>
+<li>
+<p>The code in this section prepares an execution environment for the microservice, builds a microservice using the machine-learning model, deploys the microservice into the execution environment, and publishes an API enpoint for the microservice.</p>
+</li>
+<li>
+<p>The work of creating the microservice and deploying it will be done automatically. The code will also automatically handle the source code reposity management.</p>
+</li>
+<li>
+<p>This code defines the parameters needed to build and delpoy a microservice based on the trained model.</p>
+</li>
+<li>Update microservice_design with parameters appropriate for your project. The parameters must contain valid keys, namespaces, and model paths from Algorithmia.</li>
+</ul>
+</li>
+</ul></div>
                 <footer>
     <div class="footer-buttons">
         <div class="previous"><a href="../experiment/" title="Experiment"><span>Previous</span></a></div>

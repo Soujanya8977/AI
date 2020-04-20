@@ -41,24 +41,18 @@
                 <ul class="root">
                     <li class="toctree-l1 current"><a class="nav-item current" href=".">DXC Industrialized AI Starter</a>
 <ul class="subnav">
-<li class="toctree-l2"><a class="nav-item toc" href="#requirementspre-requisites">Requirements/Pre-requisites:</a></li>
-<li class="toctree-l2"><a class="nav-item toc" href="#installation-guide">Installation Guide:</a></li>
-<li class="toctree-l2"><a class="nav-item toc" href="#project-structure">Project structure:</a></li>
-<li class="toctree-l2"><a class="nav-item toc" href="#license">License</a></li>
-<li class="toctree-l2"><a class="nav-item toc" href="#notebook">Notebook</a></li>
-<li class="toctree-l2"><a class="nav-item toc" href="#future-plans">Future Plans</a></li>
-<li class="toctree-l2"><a class="nav-item toc" href="#how-to-get-help">How to Get Help</a></li>
-<li class="toctree-l2"><a class="nav-item toc" href="#reporting-issues">Reporting Issues</a></li>
+<li class="toctree-l2"><a class="nav-item toc" href="#installation">Installation</a></li>
+<li class="toctree-l2"><a class="nav-item toc" href="#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="nav-item toc" href="#docs">Docs</a></li>
 </ul></li>
-                    <li class="toctree-l1"><a class="nav-item" href="Read/">Read and Clean</a></li>
-                    <li class="toctree-l1"><a class="nav-item" href="Visualization/">Visualization</a></li>
-                    <li class="toctree-l1"><a class="nav-item" href="data_pipeline/">Data Pipeline</a></li>
-                    <li class="toctree-l1"><a class="nav-item" href="experiment/">Run an experiment</a></li>
-                    <li class="toctree-l1"><a class="nav-item" href="publish_microservice/">Publish a Microservice</a></li>
+                    <li class="toctree-l1"><a class="nav-item" href="access_clean_explore/">Access, Clean and Explore</a></li>
+                    <li class="toctree-l1"><a class="nav-item" href="data_pipeline/">Build Data Pipelines</a></li>
+                    <li class="toctree-l1"><a class="nav-item" href="experiment/">Run AI Experiments</a></li>
+                    <li class="toctree-l1"><a class="nav-item" href="publish_microservice/">Publish Microservice</a></li>
                 </ul>
             </nav>
             <div class="repo">
-    <div class="next"><a href="Read/">Next &raquo;</a></div>
+    <div class="next"><a href="access_clean_explore/">Next &raquo;</a></div>
 </div>
         </aside>
         <div id="spacer"><button class="arrow"></button></div>
@@ -74,36 +68,127 @@
 </ul>
 </nav>
                 <div id="content"><h1 id="dxc-industrialized-ai-starter">DXC Industrialized AI Starter</h1>
-<p><strong>Welcome to DXC Industrialized AI Starter 1.0 documantion</strong></p>
-<p>This <strong>DXC Industrialized AI Starter</strong> is a python library which is extensively developed and can be used for all AI projects. This library is an open source , using this library  makes it easier to build and deploy a machine-learning microservice. 
-It installs all the required library dependencies, builds a model, deploys a microservice, and publishes an API endpoint to the microservice.</p>
-<h2 id="requirementspre-requisites">Requirements/Pre-requisites:</h2>
-<p>Requires <a href="https://www.python.org/downloads/">python 3.7</a> and above to be installed in the system in order to use the above library.</p>
-<h2 id="installation-guide">Installation Guide:</h2>
+<hr />
+<p>DXC Indusrialized AI Starter makes it easier to build and deploy Indusrialized AI.This Library does the following:</p>
+<ul>
+<li>Access, clean, and explore raw data</li>
+<li>Build data pipelines</li>
+<li>Run AI experiments</li>
+<li>Publish microservices</li>
+</ul>
+<h2 id="installation">Installation</h2>
+<hr />
 <p>In order to install and use above library please use the below code snippet:</p>
 <pre><code>1. pip install DXC-Industrialized-AI-Starter
 2. from dxc import ai
 </code></pre>
 
-<p>To know usage and to get started click <a href="https://github.com/dxc-technology/DXC-Industrialized-AI-Starter/blob/master/Getting%20Started.md">here</a></p>
-<h2 id="project-structure">Project structure:</h2>
-<pre><code>dxc
-  |-- ai
+<h2 id="getting-started">Getting Started</h2>
+<hr />
+<h3 id="access-clean-and-explore-raw-data">Access, Clean, and Explore Raw Data</h3>
+<p>Here's a quick example of using the library to access, clean, and explore raw data.</p>
+<pre><code>#Access raw data
+df = ai.read_data_frame_from_remote_json(json_url)
+df = ai.read_data_frame_from_remote_csv(csv_url)
+df = ai.read_data_frame_from_local_csv()
+df = ai.read_data_frame_from_local_excel_file()
+
+#Clean data
+raw_data = ai.clean_dataframe(df)
+
+#Explore raw data
+ai.visualize_missing_data(raw_data)
+ai.explore_features(raw_data)
+ai.plot_distributions(raw_data)
 </code></pre>
 
-<h2 id="license">License</h2>
-<p>DXC Industrialized AI Starter License <a href="https://github.com/dxc-technology/DXC-Industrialized-AI-Starter/blob/master/LICENSE">here</a></p>
-<h2 id="notebook">Notebook</h2>
-<p>Click <a href="https://colab.research.google.com/drive/1EV_Q09B-bppGbEehBgCvsv_JIM87T_n1">here</a> to access the DXC_AI_Starter reference Notebook.</p>
-<h2 id="future-plans">Future Plans</h2>
-<p>In future, we plan to provide detail documantion with few examples about the functions used in this library and add much more useful functions for AI related functions.</p>
-<h2 id="how-to-get-help">How to Get Help</h2>
-<p>If you want to help improve DXC Industrialized AI Starter directly we have a fairly detailed <a href="https://github.com/dxc-technology/DXC-Industrialized-AI-Starter/blob/master/CONTRIBUTING.md">CONTRIBUTING guide</a> in the repository that you can use to understand how code gets into the system, how the project runs, and how to make changes yourself.</p>
-<h2 id="reporting-issues">Reporting Issues</h2>
-<p>If you find any issues, feel free to report them <a href="https://github.com/dxc-technology/DXC-Industrialized-AI-Starter/issues">here</a> with clear description of your issue.</p></div>
+<p>For detailed documentation, see...,</p>
+<h3 id="build-data-pipelines">Build Data Pipelines</h3>
+<p>Below example showcases how to build a data pipeline</p>
+<pre><code># Insert data into MongoDB
+data_layer = {
+    &quot;connection_string&quot;: &quot;&lt;your connection_string&gt;&quot;,
+    &quot;collection_name&quot;: &quot;&lt;your collection_name&gt;&quot;,
+    &quot;database_name&quot;: &quot;&lt;your database_name&gt;&quot;
+}
+wrt_raw_data = ai.write_raw_data(data_layer, raw_data, date_fields = [])
+
+#Example for creating pipeline
+pipeline = [
+        {
+            '$group':{
+                '_id': {
+                    &quot;funding_source&quot;:&quot;$funding_source&quot;,
+                    &quot;request_type&quot;:&quot;$request_type&quot;,
+                    &quot;department_name&quot;:&quot;$department_name&quot;,
+                    &quot;replacement_body_style&quot;:&quot;$replacement_body_style&quot;,
+                    &quot;equipment_class&quot;:&quot;$equipment_class&quot;,
+                    &quot;replacement_make&quot;:&quot;$replacement_make&quot;,
+                    &quot;replacement_model&quot;:&quot;$replacement_model&quot;,
+                    &quot;procurement_plan&quot;:&quot;$procurement_plan&quot;
+                    },
+                &quot;avg_est_unit_cost&quot;:{&quot;$avg&quot;:&quot;$est_unit_cost&quot;},
+                &quot;avg_est_unit_cost_error&quot;:{&quot;$avg&quot;:{ &quot;$subtract&quot;: [ &quot;$est_unit_cost&quot;, &quot;$actual_unit_cost&quot; ] }}
+            }
+        }
+]
+
+df = ai.access_data_from_pipeline(wrt_raw_data, pipeline)
+</code></pre>
+
+<h3 id="run-ai-experiments">Run AI Experiments</h3>
+<p>Sample code snippet to run an AI Experiment</p>
+<pre><code>experiment_design = {
+    #model options include ['regression()', 'classification()']
+    &quot;model&quot;: ai.regression(),
+    &quot;labels&quot;: df.avg_est_unit_cost_error,
+    &quot;data&quot;: df,
+    #Tell the model which column is 'output'
+    #Also note columns that aren't purely numerical
+    #Examples include ['nlp', 'date', 'categorical', 'ignore']
+    &quot;meta_data&quot;: {
+      &quot;avg_est_unit_cost_error&quot;: &quot;output&quot;,
+      &quot;_id.funding_source&quot;: &quot;categorical&quot;,
+      &quot;_id.department_name&quot;: &quot;categorical&quot;,
+      &quot;_id.replacement_body_style&quot;: &quot;categorical&quot;,
+      &quot;_id.replacement_make&quot;: &quot;categorical&quot;,
+      &quot;_id.replacement_model&quot;: &quot;categorical&quot;,
+      &quot;_id.procurement_plan&quot;: &quot;categorical&quot;
+  }
+}
+
+trained_model = ai.run_experiment(experiment_design)
+</code></pre>
+
+<h3 id="publish-microservice">Publish Microservice</h3>
+<p>Below is the example for publishing a Microservice</p>
+<pre><code>trained_model is the output of run_experiment() function
+microservice_design = {
+    &quot;microservice_name&quot;: &quot;&lt;Name of your microservice&gt;&quot;,
+    &quot;microservice_description&quot;: &quot;&lt;Brief description about your microservice&gt;&quot;,
+    &quot;execution_environment_username&quot;: &quot;&lt;Algorithmia username&gt;&quot;,
+    &quot;api_key&quot;: &quot;&lt;your api_key&gt;&quot;,
+    &quot;api_namespace&quot;: &quot;&lt;your api namespace&gt;&quot;,   
+    &quot;model_path&quot;:&quot;&lt;your model_path&gt;&quot;
+}
+
+# publish the micro service and display the url of the api
+api_url = ai.publish_microservice(microservice_design, trained_model)
+print(&quot;api url: &quot; + api_url)
+</code></pre>
+
+<h2 id="docs">Docs</h2>
+<hr />
+<p>For detailed and complete documentation, please <a href="https://soujanya8977.github.io/AI/access_clean_explore/" target="_blank">click here</a></p>
+<h3 id="example-of-colab-notebook">Example of colab notebook</h3>
+<p><a href="https://colab.research.google.com/drive/1EV_Q09B-bppGbEehBgCvsv_JIM87T_n1#scrollTo=T5ASIaeU8Ymx" target="_blank">Here</a> is an quick example of the google colab notebook </p>
+<h3 id="contributing-guide">Contributing Guide</h3>
+<p>To know more about the contribution and guidelines please <a href="https://github.com/dxc-technology/DXC-Industrialized-AI-Starter/blob/master/CONTRIBUTING.md" target="_blank">click here</a></p>
+<h3 id="reporting-issues">Reporting Issues</h3>
+<p>If you find any issues, feel free to report them <a href="https://github.com/dxc-technology/DXC-Industrialized-AI-Starter/issues" target="_blank">here</a> with clear description of your issue.</p></div>
                 <footer>
     <div class="footer-buttons">
-        <div class="next"><a href="Read/" title="Read and Clean"><span>Next</span></a></div>
+        <div class="next"><a href="access_clean_explore/" title="Access,Clean and Explore"><span>Next</span></a></div>
     </div>
     <div class="footer-note">
         <p>

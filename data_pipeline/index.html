@@ -39,19 +39,18 @@
             <nav class="nav">
                 <ul class="root">
                     <li class="toctree-l1"><a class="nav-item" href="..">DXC Industrialized AI Starter</a></li>
-                    <li class="toctree-l1"><a class="nav-item" href="../Read/">Read and Clean</a></li>
-                    <li class="toctree-l1"><a class="nav-item" href="../Visualization/">Visualization</a></li>
-                    <li class="toctree-l1 current"><a class="nav-item current" href="./">Data Pipeline</a>
+                    <li class="toctree-l1"><a class="nav-item" href="../access_clean_explore/">Access, Clean and Explore</a></li>
+                    <li class="toctree-l1 current"><a class="nav-item current" href="./">Build Data Pipelines</a>
 <ul class="subnav">
-<li class="toctree-l2"><a class="nav-item toc" href="#build-a-data-pipeline">Build a data pipeline</a></li>
-<li class="toctree-l2"><a class="nav-item toc" href="#ingest-and-clean-data">Ingest and clean data</a></li>
+<li class="toctree-l2"><a class="nav-item toc" href="#insert-data-into-mongodb">Insert data into MongoDB</a></li>
+<li class="toctree-l2"><a class="nav-item toc" href="#build-pipeline">Build Pipeline</a></li>
 </ul></li>
-                    <li class="toctree-l1"><a class="nav-item" href="../experiment/">Run an experiment</a></li>
-                    <li class="toctree-l1"><a class="nav-item" href="../publish_microservice/">Publish a Microservice</a></li>
+                    <li class="toctree-l1"><a class="nav-item" href="../experiment/">Run AI Experiments</a></li>
+                    <li class="toctree-l1"><a class="nav-item" href="../publish_microservice/">Publish Microservice</a></li>
                 </ul>
             </nav>
             <div class="repo">
-    <div class="previous"><a href="../Visualization/">&laquo; Previous</a></div>
+    <div class="previous"><a href="../access_clean_explore/">&laquo; Previous</a></div>
     <div class="next"><a href="../experiment/">Next &raquo;</a></div>
 </div>
         </aside>
@@ -67,57 +66,69 @@
     
 </ul>
 </nav>
-                <div id="content"><h1 id="data-pipeline">Data Pipeline</h1>
-<h2 id="build-a-data-pipeline">Build a data pipeline</h2>
-<p>A data pipeline takes raw data and turns it into refined data that can be used to train and score a machine-learning model. The code in this section takes the output of raw_data() and puts it into a data store. It instructs the data store to refine the raw data into training data. It extracts the training data for use in training a machine-learning model. Specifiy the details for how to connect to the data store. Run the code to connect to the data store. "Write code" that instructs the data store on how to refine the raw data. Run the code to extract the refined data. This code assumes that Mongo DB Atlas is the data store.</p>
-<p>You will be using <a href="https://account.mongodb.com/account/login"> MongoDb </a> as your data store. This video provides a general overview of MongoDB. The document model of MongoDB breaks from the traditional relational model of common relational databases. This video describes the basic idea behind the document model. It also describes MongoDb clusters and the methods used to scale. It introduces MongoDB Atlas, which you will be using in the remainder of this notebook.</p>
-<p><a href="https://www.youtube.com/watch?v=EE8ZTQxa0AM"><img alt="Document model" src="https://img.youtube.com/vi/EE8ZTQxa0AM/0.jpg" /></a></p>
-<p>This video provides an overview of <a href="https://account.mongodb.com/account/login">Mongo DB Atlas</a>. It provides an explanation of the software. It walks you through the basic tasks of setting up an account and generating the proper connection credentials. Watch this video if you are unfamiliar with Mongo DB Atlas. This video should be removed or replaced if the data is stored using something other than Mongo DB Atlas.</p>
-<p><a href="https://www.youtube.com/watch?v=rPqRyYJmx2g"><img alt="Overview of Mongo DB" src="https://img.youtube.com/vi/rPqRyYJmx2g/0.jpg" /></a></p>
-<h3 id="write_raw_datadata_layer-raw_data-date_fields">write_raw_data(data_layer, raw_data, date_fields):</h3>
-<p>This code defines the meta-data needed to connect to Mongo DB Atlas and create a new data store cluster. This is where you define basic information about the location of the cluster and the collection and database to use. Update this code with information appropriate to your project. This code assumes that the data store is Mongo DB Atlas. In order to provide the information required in data_layer, you must:</p>
+                <div id="content"><h1 id="build-data-pipelines">Build Data Pipelines</h1>
+<hr />
+<h2 id="insert-data-into-mongodb">Insert data into MongoDB</h2>
+<p>You will be using <a href="https://account.mongodb.com/account/login" target="_blank"> MongoDb </a> as your data store.</p>
+<p>This code defines the meta-data needed to connect to Mongo DB Atlas and create a new data store cluster. This is where you define basic information about the location of the cluster and the collection and database to use. Update this code with information appropriate to your project. In order to provide the information required in data_layer, you must:</p>
 <ul>
-<li>Create a MongoDB Atlas account</li>
+<li>Create a <a href="https://account.mongodb.com/account/login" target="_blank"> MongoDb </a> Atlas account</li>
 <li>Create a cluster</li>
 <li>Create a user</li>
-<li>Generate a connection string
-<strong>Note:</strong> When you configure the IP whitelist for your cluster, choose to allow a connection from anywhere. When creating the database connection string, choose the Python driver version 3.4 or later.</li>
+<li>Generate a connection string</li>
 </ul>
-<p>specify the data layer in your function in below format.</p>
+<p><strong>Note:</strong> When you configure the IP whitelist for your cluster, choose to allow a connection from anywhere. When creating the database connection string, choose the Python driver version 3.4 or later.</p>
+<p>Example:</p>
 <pre><code>data_layer = {
     &quot;connection_string&quot;: &quot;&lt;your connection_string&gt;&quot;,
     &quot;collection_name&quot;: &quot;&lt;your collection_name&gt;&quot;,
     &quot;database_name&quot;: &quot;&lt;your database_name&gt;&quot;
 }
+
+wrt_raw_data = ai.write_raw_data(data_layer, raw_data, date_fields = [])
 </code></pre>
 
-<h2 id="ingest-and-clean-data">Ingest and clean data</h2>
-<p>This video provides an overview of how to create aggregation pipelines in Mongo DB Atlas. It describes the basic concepts and walks you through example pipelines. Watch this video if you are unfamiliar with Mongo DB Atlas aggregation pipelines.</p>
-<p><a href="https://www.youtube.com/watch?v=Kk6Er0c7srU"><img alt="creating aggregation pipelines in Mongo DB" src="https://img.youtube.com/vi/Kk6Er0c7srU/0.jpg" /></a></p>
-<h3 id="access_data_from_pipelinewrite_raw_data-pipe">access_data_from_pipeline(write_raw_data, pipe):</h3>
-<p>This code instructs the data store on how to refine the output of raw data into something that can be used to train a machine-learning model.The refined data will be stored in the df Pandas dataframe. Make sure the output is what you want before continuing.</p>
-<p>Below is a example for defining pipe(aggregation pipeline) in your function.
-<code>pipe = [
+<ul>
+<li>
+<p><strong>write_raw_data(data_layer, raw_data, date_fields = [ ]):</strong> </p>
+<ul>
+<li>This function handles Mongo DB Atlas automatically.</li>
+<li>Use write_raw_data function from ai library to convert Arrow dates to Strings data types</li>
+<li>It also transfers the raw data into the database and collection.</li>
+</ul>
+</li>
+</ul>
+<h2 id="build-pipeline">Build Pipeline</h2>
+<hr />
+<p>Example</p>
+<pre><code>pipeline = [
         {
             '$group':{
                 '_id': {
-                    "funding_source":"$funding_source",
-                    "request_type":"$request_type",
-                    "department_name":"$department_name",
-                    "replacement_body_style":"$replacement_body_style",
-                    "equipment_class":"$equipment_class",
-                    "replacement_make":"$replacement_make",
-                    "replacement_model":"$replacement_model",
-                    "procurement_plan":"$procurement_plan"
+                    &quot;funding_source&quot;:&quot;$funding_source&quot;,
+                    &quot;request_type&quot;:&quot;$request_type&quot;,
+                    &quot;department_name&quot;:&quot;$department_name&quot;,
+                    &quot;replacement_body_style&quot;:&quot;$replacement_body_style&quot;,
+                    &quot;equipment_class&quot;:&quot;$equipment_class&quot;,
+                    &quot;replacement_make&quot;:&quot;$replacement_make&quot;,
+                    &quot;replacement_model&quot;:&quot;$replacement_model&quot;,
+                    &quot;procurement_plan&quot;:&quot;$procurement_plan&quot;
                     },
-                "avg_est_unit_cost":{"$avg":"$est_unit_cost"},
-                "avg_est_unit_cost_error":{"$avg":{ "$subtract": [ "$est_unit_cost", "$actual_unit_cost" ] }}
+                &quot;avg_est_unit_cost&quot;:{&quot;$avg&quot;:&quot;$est_unit_cost&quot;},
+                &quot;avg_est_unit_cost_error&quot;:{&quot;$avg&quot;:{ &quot;$subtract&quot;: [ &quot;$est_unit_cost&quot;, &quot;$actual_unit_cost&quot; ] }}
             }
         }
-]</code></p></div>
+]
+
+df = ai.access_data_from_pipeline(wrt_raw_data, pipeline)
+</code></pre>
+
+<ul>
+<li><strong>access_data_from_pipeline(write_raw_data, pipeline):</strong> This function instructs the data store on how to refine the output of raw data into something that can be used to train a machine-learning model.The refined data will be stored in the df Pandas dataframe. Make sure the output is what you want before continuing.</li>
+</ul></div>
                 <footer>
     <div class="footer-buttons">
-        <div class="previous"><a href="../Visualization/" title="Visualization"><span>Previous</span></a></div>
+        <div class="previous"><a href="../access_clean_explore/" title="Access,Clean and Explore"><span>Previous</span></a></div>
         <div class="next"><a href="../experiment/" title="Experiment"><span>Next</span></a></div>
     </div>
     <div class="footer-note">
